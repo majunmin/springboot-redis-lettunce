@@ -1,0 +1,9 @@
+#localhost:7001
+spring:
+  redis:
+    cluster:
+      nodes: localhost
+      timeout: 10
+      max-redirects: 2
+    host: localhost
+    pool: 7001
