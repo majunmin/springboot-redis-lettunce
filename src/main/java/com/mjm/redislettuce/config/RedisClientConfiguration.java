@@ -2,6 +2,7 @@ package com.mjm.redislettuce.config;
 
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -40,7 +41,7 @@ public class RedisClientConfiguration {
     }
 
     @Bean("redisPoolTempalte")
-    public RedisTemplate redisPoolTempalte(RedisConnectionFactory redisPoolConnectionFactory) {
+    public RedisTemplate redisPoolTempalte(@Qualifier("redisPoolConnectionFactory")RedisConnectionFactory redisPoolConnectionFactory) {
         RedisTemplate redisTemplate = new RedisTemplate();
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
@@ -50,7 +51,7 @@ public class RedisClientConfiguration {
     }
 
     @Bean("redisTempalte")
-    public RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+    public RedisTemplate redisTemplate(@Qualifier("redisConnectionFactory") RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate redisTemplate = new RedisTemplate();
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
@@ -65,7 +66,7 @@ public class RedisClientConfiguration {
      * @return
      */
     @Bean("redisConnectionFactory")
-    public LettuceConnectionFactory lettuceConnectionFactory(RedisConfiguration redisConfiguration) {
+    public LettuceConnectionFactory lettuceConnectionFactory( RedisConfiguration redisConfiguration) {
         return new LettuceConnectionFactory(redisConfiguration);
     }
 

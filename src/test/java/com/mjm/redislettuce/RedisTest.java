@@ -52,13 +52,27 @@ public class RedisTest {
     }
 
     @Test
-    public void testLettucePut() {
-        LocalDateTime startTime = LocalDateTime.now();
-        IntStream.range(0, 100).forEach((i) -> {
-            redisTemplate.opsForList().leftPush("myqueue", i);
+    public void testConnectionPool() {
+
+        ExecutorService pool = Executors.newFixedThreadPool(10);
+        LocalDateTime nPoolStartTime = LocalDateTime.now();
+        IntStream.range(0, 10000).forEach((i) -> {
+            redisTemplate.opsForList().leftPop("myqueue");
         });
-        LocalDateTime endTime = LocalDateTime.now();
-        System.out.println(Duration.between(startTime, endTime).toMillis()); //
+        LocalDateTime nPoolEndTime = LocalDateTime.now();
+
+        System.out.println("pooled pop 10000 data : " + Duration.between(nPoolStartTime, nPoolEndTime).toMillis()  + "ms"); //
+
+        LocalDateTime poolStartTime = LocalDateTime.now();
+        IntStream.range(0, 10000).forEach((i) -> {
+            redisTemplate.opsForList().leftPop("myqueue");
+        });
+        LocalDateTime poolEndTime = LocalDateTime.now();
+        System.out.println("pooled pop 10000 data : " + Duration.between(poolStartTime, poolEndTime).toMillis() + "ms"); //
+
+
+
+
     }
 
 
