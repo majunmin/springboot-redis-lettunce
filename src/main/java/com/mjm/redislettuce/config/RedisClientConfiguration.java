@@ -46,7 +46,7 @@ public class RedisClientConfiguration {
     }
 
     @Bean("redisPoolTempalte")
-    public RedisTemplate redisPoolTempalte(@Qualifier("redisPoolConnectionFactory")RedisConnectionFactory redisPoolConnectionFactory) {
+    public RedisTemplate redisPoolTempalte(RedisConnectionFactory redisPoolConnectionFactory) {
         RedisTemplate redisTemplate = new RedisTemplate();
         RedisSerializer<String> redisSerializer = new StringRedisSerializer();
         redisTemplate.setKeySerializer(redisSerializer);
@@ -65,7 +65,7 @@ public class RedisClientConfiguration {
     }
 
     @Bean("redisTempalte")
-    public RedisTemplate redisTemplate(@Qualifier("redisConnectionFactory") RedisConnectionFactory redisConnectionFactory) {
+    public RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate redisTemplate = new RedisTemplate();
         RedisSerializer<String> redisSerializer = new StringRedisSerializer();
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);

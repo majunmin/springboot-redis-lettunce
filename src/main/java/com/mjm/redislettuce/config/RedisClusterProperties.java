@@ -13,10 +13,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class RedisClusterProperties {
 
-    @Value("redis.cluster.nodes")
+    @Value("${redis.cluster.nodes}")
     private String nodes;
-    @Value("redis.cluster.timeout")
+    @Value("${redis.cluster.timeout}")
     private String timeout;
-    @Value("redis.cluster.max-redirects")
+    @Value("${redis.cluster.max-redirects}")
     private String maxRedirects;
 }
