@@ -6,4 +6,4 @@ spring:
       timeout: 10
       max-redirects: 2
     host: localhost
-    pool: 7001
+    port: 7001
